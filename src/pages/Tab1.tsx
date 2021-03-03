@@ -28,7 +28,8 @@ import {
   IonMenu,
   IonList,
   IonItemDivider,
-  IonListHeader
+  IonListHeader,
+  IonChip
 } from "@ionic/react";
 
 import "./Tab1.css";
@@ -73,10 +74,12 @@ const Tab1: React.FC = ({ items = mockNavItems }) => {
         />
 
         <div slot="fixed" className="app-connecting">
-          <div className="app-connection">
-            <p>Connecting...</p>
-            <IonProgressBar type="indeterminate"></IonProgressBar>
-          </div>
+          <IonChip>
+            <IonLabel>
+              Connecting...
+              <IonProgressBar type="indeterminate"></IonProgressBar>
+            </IonLabel>
+          </IonChip>
         </div>
       </IonContent>
     </IonPage>

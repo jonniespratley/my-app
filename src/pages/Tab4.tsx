@@ -7,12 +7,14 @@ import {
   IonHeader,
   IonPage,
   IonTitle,
-  IonToolbar,
+  IonToolbar
 } from "@ionic/react";
 import ExploreContainer from "../components/ExploreContainer";
 
 const Tab4: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
+  const [showModal3, setShowModal3] = useState(false);
   return (
     <IonPage>
       <IonHeader>
@@ -26,6 +28,24 @@ const Tab4: React.FC = () => {
             <IonTitle size="large">Tab 4</IonTitle>
           </IonToolbar>
         </IonHeader>
+        <IonModal isOpen={showModal2} swipeToClose={true}>
+          <p>This is a modal</p>
+          <IonButton onClick={() => setShowModal2(false)}>
+            Close Modal
+          </IonButton>
+          <IonButton onClick={() => setShowModal3(true)}>
+            Show Modal 3
+          </IonButton>
+        </IonModal>
+        <IonModal isOpen={showModal3} swipeToClose={true}>
+          <p>This is a modal</p>
+          <IonButton onClick={() => setShowModal3(false)}>
+            Close Modal
+          </IonButton>
+          <IonButton onClick={() => setShowModal3(true)}>
+            Show Modal 3
+          </IonButton>
+        </IonModal>
 
         <IonModal
           isOpen={showModal}
@@ -42,6 +62,7 @@ const Tab4: React.FC = () => {
         </IonModal>
 
         <IonButton onClick={() => setShowModal(true)}>Show Modal</IonButton>
+        <IonButton onClick={() => setShowModal2(true)}>Show Modal 2</IonButton>
       </IonContent>
     </IonPage>
   );
