@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import {
   IonContent,
   IonHeader,
+  IonAvatar,
   IonPage,
   IonToast,
   IonLabel,
   IonProgressBar,
+  IonThumbnail,
   IonTitle,
   IonButton,
   IonToolbar,
@@ -15,55 +17,67 @@ import {
   IonCardTitle,
   IonCardContent,
   IonItem,
+  IonIcon,
+  IonGrid,
+  IonCol,
+  IonRow,
+  IonButtons,
+  IonBackButton,
+  IonMenuButton,
+  IonSearchbar,
+  IonMenu,
+  IonList,
+  IonItemDivider,
+  IonListHeader
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
+
 import "./Tab1.css";
 
-const Tab1: React.FC = () => {
-  const [showToast1, setShowToast1] = useState(false);
+const mockNavItems = [
+  { id: 1, label: "Outdoor" },
+  { id: 2, label: "Indoor" },
+  { id: 3, label: "Tasks" },
+  { id: 4, label: "Things" },
+  { id: 5, label: "Friends" },
+  { id: 6, label: "Calendar" }
+];
+
+const Tab1: React.FC = ({ items = mockNavItems }) => {
+  const [showToast1, setShowToast1] = useState(true);
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Tab 1</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+    <IonPage className="app-dashboard-grid">
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 1</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonCard>
-          <IonCardHeader>
-            <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
-            <IonCardTitle>Card Title</IonCardTitle>
-          </IonCardHeader>
+        <img src="https://picsum.photos/500/350" alt="Large Image" />
 
-          <IonCardContent>
-            Keep close to Nature's heart... and break clear away, once in
-            awhile, and climb a mountain or spend a week in the woods. Wash your
-            spirit clean.
-          </IonCardContent>
-        </IonCard>
-
-        <IonCard>
-          <IonItem href="#" className="ion-activated">
-            <IonLabel>Card Link Item 1 activated</IonLabel>
-          </IonItem>
-          <IonButton onClick={() => setShowToast1(true)} expand="block">
-            Show Toast 1
-          </IonButton>
-          <IonProgressBar type="indeterminate" />
-        </IonCard>
+        <IonGrid>
+          <IonRow>
+            {items.map((item: any) => (
+              <IonCol key={item.id} size="4">
+                <IonItem button detail={false}>
+                  <svg>
+                    <rect width="100%" height="100%" fill="pink"></rect>
+                  </svg>
+                  <IonLabel>{item.label}</IonLabel>
+                </IonItem>
+              </IonCol>
+            ))}
+          </IonRow>
+        </IonGrid>
 
         <IonToast
-          color="tertiary"
+          color="dark"
           isOpen={showToast1}
           onDidDismiss={() => setShowToast1(false)}
-          message="Your settings have been saved."
+          message="Paired successfully."
           duration={2000}
         />
+
+        <div slot="fixed" className="app-connecting">
+          <div className="app-connection">
+            <p>Connecting...</p>
+            <IonProgressBar type="indeterminate"></IonProgressBar>
+          </div>
+        </div>
       </IonContent>
     </IonPage>
   );
